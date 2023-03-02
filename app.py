@@ -4,20 +4,16 @@ import pandas as pd
 import openai
 
 dir_script = os.path.dirname(os.path.abspath(__file__))
-#app para comunicar con chatgp3 y database en AWS
-
-
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-print(os.getcwd())
-app = Flask(__name__)
+
+app = Flask(__name__, template_folder='app/templates')
 app.config['DEBUG'] = True
 
 
 @app.route("/")
 def index():
-    template = render_template(dir_script + '\\app\\templates\\index.html')
-    return template
+    return render_template('index.html')
 
 @app.route('/', methods=['POST'])
 def my_form_post():
@@ -34,4 +30,5 @@ def my_form_post():
     text_output = text_output.replace('\t', '    ')
     return text_output + '<p><a href="/">Back</a></p>\n'
 
-app.run()
+if __name__ == "__main__":
+    app.run()
