@@ -7,4 +7,4 @@ El presente proyecto se enmarca dentro del módulo de productivización de data 
 * Almacenar las preguntas, respuestas y fechas correspondientes en una base de datos desplegada en cloud (AWS).
 * Desplegar la aplicación en Docker.
 
-<img src="img/arquitectura.jpg" style="width:600px;height:500px;">
+<img src="/img/arquitectura.JPG" style="width:600px;height:500px;">
