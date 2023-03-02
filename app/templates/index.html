@@ -1,11 +1,46 @@
+<!-- <!DOCTYPE html> -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat GPT</title>
+        <h1>PyAdvisor</h1>
+        <h2>Your AI assistant.</h2>
+    </head>
+    <body>
+        <form method="POST">
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt"><br>
 
+            <br>
 
-<h1>PyAdvisor</h1>
+            <label for="engine">Engine:</label>
+            <select id="engine" name="engine"><br>
+                <option value="text-davinci-003">Davinci (text-003)</option>
+                <option value="text-davinci-002">Davinci (text-002)</option>
+                <option value="code-davinci-003">Davinci (code-002)</option>
+                <option value="gpt-3.5-turbo">GPT-Turbo (3.5)</option>
+                <option value="gpt-3.5-turbo-0301">GPT-Turbo-0301 (3.5)</option>
+            </select>
 
-<h2>Your AI assistant.</h2>
+            <br>
+            <br>
 
-<p>Enter your message. (Example: Build a generic python function that returns a model prediction)</p>
-<form method="POST">
-    <input name="variable">
-    <input type="submit">
-</form>
+            <label for="max_tokens">Max Tokens:</label>
+            <input type="text" id="max_tokens" name="max_tokens"><br>
+
+            <br>
+
+            <label for="temperature">Temperature:</label>
+            <input type="text" id="temperature" name="temperature"><br>
+
+            <br>
+
+            <label for="api_key">API Key:</label>
+            <input type="text" id="api_key" name="api_key"><br>
+
+            <br>
+
+            <input type="submit" value="Enviar datos">
+        </form>
+    </body>
+</html>

@@ -1,15 +1,11 @@
 from flask import Flask, render_template, request
 import os
-import pandas as pd
-import openai
-
-dir_script = os.path.dirname(os.path.abspath(__file__))
+from app import models
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-app = Flask(__name__, template_folder='app/templates')
+app = Flask(__name__, template_folder = 'app/templates')
 app.config['DEBUG'] = True
-
 
 @app.route("/")
 def index():
@@ -17,15 +13,17 @@ def index():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
+    # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
-    
-    response = openai.Completion.create(
-    engine="text-davinci-003",
-    prompt=prompt,
-    max_tokens=1000,
-    temperature=0.9
-    )
-    text_output = response.choices[0].text
+    engine = request.form['engine']
+    temperature = float(request.form['temperature'])
+    max_tokens = int(float(request.form['max_tokens']))
+    api_key = request.form['api_key']
+
+    # send these to the gpt model
+    text_output = models.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
+
+    # process the output
     text_output = text_output.replace('\n', '<br>')
     text_output = text_output.replace('\t', '    ')
     return text_output + '<p><a href="/">Back</a></p>\n'
