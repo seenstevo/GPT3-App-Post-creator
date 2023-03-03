@@ -1,5 +1,5 @@
 import openai
-
+import time
 
 
 def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
@@ -17,3 +17,7 @@ def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
     )
 
     return output.choices[0].text
+
+
+def get_timestamp():
+    return time.time

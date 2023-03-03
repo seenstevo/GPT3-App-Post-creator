@@ -11,8 +11,10 @@ app.config['DEBUG'] = True
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods = ['POST'])
 def my_form_post():
+    # get timestamp
+    time_stamp_query = models.get_timestamp()
     # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
     if prompt == "":
@@ -30,7 +32,14 @@ def my_form_post():
     # process the output
     text_output = text_output.replace('\n', '<br>')
     text_output = text_output.replace('\t', '    ')
+
+    
     return text_output + '<p><a href="/">Back</a></p>\n'
+
+
+@app.route('/', methods = ['POST'])
+def log_app_use():
+    pass
 
 if __name__ == "__main__":
     app.run(host = 'localhost', port = 5000)
