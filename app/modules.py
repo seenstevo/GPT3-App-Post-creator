@@ -58,3 +58,10 @@ def insert_row(prompt, response, date):
     cursor.execute(insert_data)
     db.commit()
     db.close()
+
+
+def inputs_non_empty(prompt, api_key, temperature, max_tokens):
+    if (prompt == "" or api_key == "" or temperature == "" or max_tokens == ""):
+        return False
+    else:
+        return True
