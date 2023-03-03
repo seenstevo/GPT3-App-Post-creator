@@ -15,8 +15,10 @@ def index():
 def my_form_post():
     # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
-    engine = request.form['engine']
-    temperature = float(request.form['temperature'])
+    if prompt == "":
+        return 'No prompt provided, please try again.' + '<p><a href="/">Back</a></p>\n'
+    engine = request.form['engine'] # already has a default
+    temperature = float(request.form['temperature'])    # needs a default
     max_tokens = int(float(request.form['max_tokens']))
     api_key = request.form['api_key']
 
