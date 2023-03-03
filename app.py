@@ -17,10 +17,12 @@ def my_form_post():
     prompt = request.form['prompt']
     if prompt == "":
         return 'No prompt provided, please try again.' + '<p><a href="/">Back</a></p>\n'
-    engine = request.form['engine'] # already has a default
-    temperature = float(request.form['temperature'])    # needs a default
+    engine = request.form['engine']
+    temperature = float(request.form['temperature'])
     max_tokens = int(float(request.form['max_tokens']))
     api_key = request.form['api_key']
+    if api_key == "":
+        return 'No OpenAI API key provided, please try again.' + '<p><a href="/">Back</a></p>\n'
 
     # send these to the gpt model
     text_output = models.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
