@@ -1,5 +1,5 @@
 import openai
-import time
+from datetime import datetime
 import pymysql
 
 
@@ -21,7 +21,8 @@ def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
 
 
 def get_timestamp():
-    return time.time
+    date_time_query = datetime.now()
+    return date_time_query.strftime("%d/%m/%Y %H:%M:%S")
 
 
 def establish_connection_aws():

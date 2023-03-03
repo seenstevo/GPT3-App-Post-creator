@@ -14,7 +14,7 @@ def index():
 @app.route('/', methods = ['POST'])
 def my_form_post():
     # get timestamp
-    time_stamp_query = str(modules.get_timestamp())
+    time_stamp_query = modules.get_timestamp()
     # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
     if prompt == "":
