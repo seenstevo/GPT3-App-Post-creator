@@ -14,7 +14,7 @@ def index():
 @app.route('/', methods = ['POST'])
 def my_form_post():
     # get timestamp
-    time_stamp_query = modules.get_timestamp()
+    time_stamp_query = str(modules.get_timestamp())
     # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
     if prompt == "":
@@ -30,11 +30,13 @@ def my_form_post():
     text_output = modules.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
 
     # process the output
-    text_output = text_output.replace('\n', '<br>')
-    text_output = text_output.replace('\t', '    ')
+    text_output_html = text_output.replace('\n', '<br>')
+    text_output_html = text_output_html.replace('\t', '    ')
+
+    modules.insert_row(prompt, text_output, time_stamp_query)
 
     
-    return text_output + '<p><a href="/">Back</a></p>\n'
+    return text_output_html + '<p><a href="/">Back</a></p>\n'
 
 
 @app.route('/', methods = ['POST'])

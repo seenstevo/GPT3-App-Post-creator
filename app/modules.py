@@ -26,8 +26,8 @@ def get_timestamp():
 
 def establish_connection_aws():
     username = "admin"
-    password = "adminjjs"
-    host = "database-1.ccl50gywe0s6.us-east-2.rds.amazonaws.com" 
+    password = "TheBridgeSchool"
+    host = "database-2.cvuovpb4vssk.us-east-2.rds.amazonaws.com" 
     port = 3306
 
     db = pymysql.connect(host = host,
@@ -39,16 +39,20 @@ def establish_connection_aws():
     return db
 
 
-def insert_row(prompt, response, date, table):
+def insert_row(prompt, response, date):
 
     db = establish_connection_aws()
 
     cursor = db.cursor()
 
+    use_db = ''' USE respuestas_GPT'''
+
+    cursor.execute(use_db)
+
     insert_data = '''
-    INSERT INTO %s (preguntas, respuestas, fecha)
+    INSERT INTO respuestas (preguntas,respuestas,fecha)
     VALUES ('%s', '%s', '%s')
-    ''' % (table, prompt, response, date)
+    ''' % (prompt, response, date)
 
     cursor.execute(insert_data)
     db.commit()
