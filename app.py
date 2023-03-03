@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import os
-from app import models
+from app import modules
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -14,7 +14,7 @@ def index():
 @app.route('/', methods = ['POST'])
 def my_form_post():
     # get timestamp
-    time_stamp_query = models.get_timestamp()
+    time_stamp_query = modules.get_timestamp()
     # collect inputs from user once submit button pressed
     prompt = request.form['prompt']
     if prompt == "":
@@ -27,7 +27,7 @@ def my_form_post():
         return 'No OpenAI API key provided, please try again.' + '<p><a href="/">Back</a></p>\n'
 
     # send these to the gpt model
-    text_output = models.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
+    text_output = modules.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
 
     # process the output
     text_output = text_output.replace('\n', '<br>')

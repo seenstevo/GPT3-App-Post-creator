@@ -1,5 +1,6 @@
 import openai
 import time
+import pymysql
 
 
 def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
@@ -21,3 +22,34 @@ def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
 
 def get_timestamp():
     return time.time
+
+
+def establish_connection_aws():
+    username = "admin"
+    password = "adminjjs"
+    host = "database-1.ccl50gywe0s6.us-east-2.rds.amazonaws.com" 
+    port = 3306
+
+    db = pymysql.connect(host = host,
+                         user = username,
+                         password = password,
+                         cursorclass = pymysql.cursors.DictCursor,
+                         port = port)
+    
+    return db
+
+
+def insert_row(prompt, response, date, table):
+
+    db = establish_connection_aws()
+
+    cursor = db.cursor()
+
+    insert_data = '''
+    INSERT INTO %s (preguntas, respuestas, fecha)
+    VALUES ('%s', '%s', '%s')
+    ''' % (table, prompt, response, date)
+
+    cursor.execute(insert_data)
+    db.commit()
+    db.close()
