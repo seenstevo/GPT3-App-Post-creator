@@ -31,6 +31,7 @@ def my_form_post():
         gpt_call_status, text_output = modules.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
 
         # process the output
+        text_output = text_output.replace("'", "")
         text_output_html = text_output.replace('\n', '<br>')
         text_output_html = text_output_html.replace('\t', '    ')
 
