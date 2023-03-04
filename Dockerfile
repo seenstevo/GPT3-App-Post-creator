@@ -8,7 +8,7 @@ WORKDIR /gpt3app
 COPY . /gpt3app
 
 # Install any things relating to the database
-
+RUN apt-get update && apt-get install -y default-libmysqlclient-dev
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt

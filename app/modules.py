@@ -1,59 +1,105 @@
 import openai
 from datetime import datetime
 import pymysql
+import configparser
 
 
-def fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens):
+def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: float, max_tokens: int) -> str:
+    '''
+    Function wrapper to call gpt3 model with prompt.
 
-    if api_key == "":
-        openai.api_key = open("./app/gpt_api_key.txt", "r").read()
-    else:
-        openai.api_key = api_key
+    Args:
+        prompt (str): the input to the GPT3 model
+        api_key (str): API key of user to allow access to GPT3 API
+        engine (str): the GPT3 model to use
+        temperature (float): a value between 0 and 1 which influences the creativity of the GPT3 model
+        max_tokens (int): the max tokens that the model will use which defines the max length of the output
 
-    output = openai.Completion.create(
+    Returns:
+        str: the repsonse text
+
+    '''
+    # this will only be nessesary if we use one of our keys as a default
+    # if api_key == "":
+    #     config = configparser.ConfigParser()
+    #     config.read('./app/config.ini')
+    #     openai.api_key = config['gpt3_api_key']['api_key']
+    # else:
+    #     openai.api_key = api_key
+    openai.api_key = api_key
+
+    try:
+        output = openai.Completion.create(
         engine = engine,
         prompt = prompt, 
         max_tokens = max_tokens,
         temperature = temperature
     )
 
-    return output.choices[0].text
+        return output.choices[0].text
+    except:
+        raise ValueError()
 
 
-def get_timestamp():
+
+
+def get_timestamp() -> str:
+    '''
+    Simply returns a string of the current time and date to log a query 
+    '''
     date_time_query = datetime.now()
     return date_time_query.strftime("%d/%m/%Y %H:%M:%S")
 
 
-def establish_connection_aws():
-    username = "admin"
-    password = "TheBridgeSchool"
-    host = "database-2.cvuovpb4vssk.us-east-2.rds.amazonaws.com" 
-    port = 3306
 
-    db = pymysql.connect(host = host,
-                         user = username,
-                         password = password,
-                         cursorclass = pymysql.cursors.DictCursor,
-                         port = port)
+def establish_connection_aws():
+    '''
+    Function wrapper establish the connection to the AWS SQL database
+    Reads in the connection information from the config.ini file
+    Used in the insert_row function
+
+    Returns:
+        a database connection
+    '''
+
+    config = configparser.ConfigParser()
+    config.read('./app/config.ini')
+
+    db = pymysql.connect(host = config['seandatabase']['host'],
+                         user = config['seandatabase']['username'],
+                         password = config['seandatabase']['password'],
+                         port = int(config['seandatabase']['port']),
+                         database = config['seandatabase']['database'],
+                         cursorclass = pymysql.cursors.DictCursor)
     
     return db
 
 
-def insert_row(prompt, response, date):
+def insert_row(prompt: str, response: str, date: str, engine: str, temperature: float, max_tokens: int, gpt_call_status: str) -> None:
+    '''
+    Function to insert into the SQL database the log of each call
+    Use the establish_connection_aws() function to establish the database connection
+
+    Args:
+        prompt (str): the input to the GPT3 model
+        response (str): the response from GPT3
+        api_key (str): API key of user to allow access to GPT3 API
+        engine (str): the GPT3 model to use
+        temperature (float): a value between 0 and 1 which influences the creativity of the GPT3 model
+        max_tokens (int): the max tokens that the model will use which defines the max length of the output
+
+    Returns:
+        None
+    '''
 
     db = establish_connection_aws()
 
     cursor = db.cursor()
 
-    use_db = ''' USE respuestas_GPT'''
-
-    cursor.execute(use_db)
-
     insert_data = '''
-    INSERT INTO respuestas (preguntas,respuestas,fecha)
-    VALUES ('%s', '%s', '%s')
-    ''' % (prompt, response, date)
+    INSERT INTO respuestas (preguntas, respuestas, fecha, engine, temperature, max_tokens, gpt_call_status)
+    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
+    ''' % (prompt, response, date, engine, temperature, max_tokens, gpt_call_status)
 
     cursor.execute(insert_data)
     db.commit()
@@ -61,6 +107,9 @@ def insert_row(prompt, response, date):
 
 
 def inputs_non_empty(prompt, api_key, temperature, max_tokens):
+    '''
+    Helper function to check that inputs have been input before making a call to GPT3
+    '''
     if (prompt == "" or api_key == "" or temperature == "" or max_tokens == ""):
         return False
     else:

@@ -1,34 +1,25 @@
 #libraries
 import pymysql
+import configparser
+
+config = configparser.ConfigParser()
+config.read('./app/config.ini')
 
 
-
-
-username = "admin"
-password = "TheBridgeSchool"
-host = "database-2.cvuovpb4vssk.us-east-2.rds.amazonaws.com" 
-port = 3306
-
-
-db = pymysql.connect(host = host,
-                     user = username,
-                     password = password,
-                     cursorclass = pymysql.cursors.DictCursor
-)
-
-# El objeto cursor es el que ejecutará las queries y devolverá los resultados
+db = pymysql.connect(host = config['seandatabase']['host'],
+                     user = config['seandatabase']['username'],
+                     password = config['seandatabase']['password'],
+                     port = int(config['seandatabase']['port']),
+                     cursorclass = pymysql.cursors.DictCursor)
 
 cursor = db.cursor()
 
-
 #Create database
-
 create_db = '''CREATE DATABASE respuestas_GPT'''
 cursor.execute(create_db)
+cursor.connection.commit()
 
 #Select database and create table
-
-cursor.connection.commit()
 use_db = ''' USE respuestas_GPT'''
 cursor.execute(use_db)
 
@@ -38,6 +29,10 @@ CREATE TABLE respuestas (
     preguntas TEXT,
     respuestas TEXT,
     fecha TEXT,
+    engine TEXT,
+    temperature FLOAT,
+    max_tokens INT,
+    gpt_call_status TEXT,
     primary key (id)
 )
 '''
