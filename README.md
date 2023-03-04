@@ -1,10 +1,33 @@
-# GPT3 - App "Post creator"
+# Automatic Post Generator using ChatGPT
 
-El presente proyecto se enmarca dentro del módulo de productivización de data science y tiene como objetivo la creación de una aplicación web en Python que genere post autómaticos basados en un modelo preentrenado, en este caso ChatGPT. El proyecto final consistirá en el desarrollo y despliegue de la aplicación.
+This project creates a web application using Python that generates automatic posts based on the ChatGPT pre-trained model. The final project consists of the development and deployment of the application. The answers will be storaged using Amazon Web Services and it´s deployed using Docker
 
-## Objetivos:
-* Desarrollar una aplicación web en Python con Flask que se conecte a la API de GPT3 para generar respuestas a preguntas específicas. Deberá de tener un front end sencillo pero usable por el usuario.
-* Almacenar las preguntas, respuestas y fechas correspondientes en una base de datos desplegada en cloud (AWS).
-* Desplegar la aplicación en Docker.
+## Objectives
+* Develop a web application using Python and Flask that connects to the GPT3 API to generate responses to specific questions. The front-end should be simple but usable for the user.
+* Store the questions, answers, and corresponding dates in a database deployed on the cloud (AWS).
+* Deploy the application in Docker.
 
-<img src="/img/arquitectura.JPG" style="width:600px;height:500px;">
+## Technologies Used
+* Python
+* Flask
+* GPT3 API
+* AWS
+* Docker
+
+## Installation
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies by running `pip install -r requirements.txt` in your terminal.
+3. Create an account on the GPT3 API and obtain an API key.
+
+## Usage
+1. Run the application by running `python app.py` in your terminal.
+2. Access the application by navigating to `http://localhost:5000` in your web browser.
+
+## Deployment with Docker
+
+
+## Contributing
+If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
+
+## License
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
