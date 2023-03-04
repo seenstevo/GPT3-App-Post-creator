@@ -28,12 +28,7 @@ def my_form_post():
 
         # send these to the gpt model
         # seria util saber si hay un error con la respuesta con GPT y hacemos un try, except o algo
-        try:
-            text_output = modules.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
-            gpt_call_status = 'Success'
-        except ValueError:
-            text_output = "Something went wrong with the GPT3 call. Please check API key and try again. Do you still have tokens?"
-            gpt_call_status = 'Error'
+        gpt_call_status, text_output = modules.fetch_gpt_response(prompt, api_key, engine, temperature, max_tokens)
 
         # process the output
         text_output_html = text_output.replace('\n', '<br>')

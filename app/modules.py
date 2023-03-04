@@ -16,7 +16,8 @@ def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: floa
         max_tokens (int): the max tokens that the model will use which defines the max length of the output
 
     Returns:
-        str: the repsonse text
+        str: the status of the call, success or error
+        str: the response text
 
     '''
     # this will only be nessesary if we use one of our keys as a default
@@ -36,9 +37,9 @@ def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: floa
         temperature = temperature
     )
 
-        return output.choices[0].text
+        return "Success", output.choices[0].text
     except:
-        raise ValueError()
+        return "Error", "Something went wrong with the GPT3 call. Please check API key and try again. Do you still have tokens?"
 
 
 
