@@ -42,4 +42,4 @@ def my_form_post():
         return 'Inputs missing, please try again.' + '<p><a href="/">Back</a></p>\n'
 
 if __name__ == "__main__":
-    app.run(host = 'localhost', port = 5000)
+    app.run(host = '0.0.0.0', port = 5000)
