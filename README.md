@@ -25,6 +25,11 @@ This project creates a web application using Python that generates automatic pos
 
 ## Deployment with Docker
 
+1. Load the image by running `docker pull seenstevo/gpt-app`
+2. Run the image: `docker run -p 5000:5000 <id_image>`
+  (You can see image id by running `docker images` in your terminal)
+3. Click on the first http adress shown in your terminal. It should usually be: http://127.0.0.1:5000
+     
 
 ## Contributing
 If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
