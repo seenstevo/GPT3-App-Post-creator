@@ -7,6 +7,7 @@ import configparser
 def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: float, max_tokens: int) -> str:
     '''
     Function wrapper to call gpt3 model with prompt.
+    Will also call max_tokens function to ensure no values out of range are passed. 
 
     Args:
         prompt (str): the input to the GPT3 model
@@ -42,6 +43,27 @@ def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: floa
         return "Error", "Something went wrong with the GPT3 call. Please check API key and try again. Do you still have tokens?"
 
 
+def check_max_tokens(max_tokens: int, engine: str) -> int:
+    '''
+    This function will check the given max_tokens value against the max allowed for a given model and limit this value
+
+    Args:
+        max_tokens (int): the max_tokens set by user to be checked against the model
+        engine (str): the GPT3 engine selected against which to check the max_tokens
+
+    Returns:
+        max_tokens (int): the max_tokens, either capped at the max or the original value
+    '''
+
+    if (engine == 'ada' and max_tokens > 2047):
+        max_tokens = 2047
+    elif (engine == 'text-davinci-003' or engine == 'text-davinci-002') and (max_tokens > 3999):
+        max_tokens = 3999
+    elif (engine == 'gpt-3.5-turbo' or engine == 'gpt-3.5-turbo-0301') and (max_tokens > 4095):
+        max_tokens = 4095
+    elif (engine == 'code-davinci-003' and max_tokens > 7999):
+        max_tokens = 7999
+    return max_tokens
 
 
 def get_timestamp() -> str:
@@ -107,11 +129,11 @@ def insert_row(prompt: str, response: str, date: str, engine: str, temperature: 
     db.close()
 
 
-def inputs_non_empty(prompt, api_key, temperature, max_tokens):
+def inputs_non_empty(prompt, api_key, max_tokens):
     '''
     Helper function to check that inputs have been input before making a call to GPT3
     '''
-    if (prompt == "" or api_key == "" or temperature == "" or max_tokens == ""):
+    if (prompt == "" or api_key == "" or max_tokens == ""):
         return False
     else:
         return True
