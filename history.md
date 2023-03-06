@@ -37,6 +37,6 @@ are passed.
 
 `sudo docker build --build-arg DB_HOST=<db_host> --build-arg DB_PORT=3306 --build-arg DB_USERNAME=<username> --build-arg DB_PASSWORD=<password> --build-arg DB_DATABASE=<db_name> --tag gpt-app:v2 .`
 
-`sudo docker tag gpt-app:v1 seenstevo/:gpt-app:v1`
+`sudo docker tag gpt-app:v1 seenstevo/gpt-app:v1`
 
-`sudo docker push seenstevo/:gpt-app:v1`
+`sudo docker push seenstevo/gpt-app:v1`
