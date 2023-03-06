@@ -35,26 +35,26 @@ are passed.
 - We also included ARG options in the docker file which then allow build-args being passed during `docker build`. This means that users will not have access to these login details but the app will still connect to the AWS RDS database.
 - The build docker was pushed to dockerhub where it is available for use.
 
-# build the docker image locally
+### build the docker image locally
 `sudo docker build --build-arg DB_HOST=<db_host> --build-arg DB_PORT=3306 --build-arg DB_USERNAME=<username> --build-arg DB_PASSWORD=<password> --build-arg DB_DATABASE=<db_name> --tag gpt-app:v3 .`
 
-## rename ready to go to seenstevo account
+### rename ready to go to seenstevo account
 `sudo docker tag gpt-app:v3 seenstevo/:gpt-app:v3`
 
-## upload the docker image to dockerhub
+### upload the docker image to dockerhub
 `sudo docker push seenstevo/gpt-app:v3`
 
-## download it from dockerhub
+### download it from dockerhub
 `sudo docker pull seenstevo/gpt-app:v3`
 
-## then to run the container
+### then to run the container
 `sudo docker run -p 5000:5000 gpt-app:v3`
 
 # Git Hub
 
 [Repositorie](https://github.com/JNevado81/GPT3-App-Post-creator.git)
 
-## upload commands
+### upload commands
 `git checkout dev`
 
 `git pull`
@@ -63,11 +63,12 @@ are passed.
 
 `git merge dev`
 
-If there is a conflict, a git add and a git commit must be performed after the conflict is resolved.
+- If there is a conflict, a git add and a git commit must be performed after the conflict is resolved.
 ---------
 `git add .`
 
 `git commit -m "xxxx"`
---------------------
+
+---------
 
 `git push`
