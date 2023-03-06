@@ -1,26 +1,33 @@
-# desarrollo del app.py.
-- creacion de index.html
-- static css stlye
-- leccion de las entradas de usuario y logica para esegurarnos que tengamos todas
-- llamada a la API de GPT
-- preceso de la respuesta de GPT
+# Development of the app.py
+- Creation of index.html: web page where we can launch the questions to Chat-GPT.
+- Creation of the style sheet (cascading style sheets): design and presentation of the web page.
+- Web parameters: 
+    - prompt: text input, question. 
+    - engine: engine to generate the answer.
+    - max_tokens: limits the number of tokens the model can generate. 
+    - api_key: API key for authentication.
+    - temperature: degree of freedom we give to the model when generating the answer, the higher the number, the greater the creative freedom.
+- Validation of the parameters entered by the user on the web. Mandatory: prompt, api_key and max_tokens. Checks the max_tokens value against the chosen model.
+- GPT API call (request).
+- GPT response.
 
-# modules
-- fetch_gpt_response()
-- check_max_tokens()
-- get_timestamp()
-- establish_connection_aws()
-- insert_row()
-- inputs_non_empty()
+# Functions
+- fetch_gpt_response(): function wrapper to call gpt3 model with prompt. Will also call max_tokens function to ensure no values out of range 
+are passed.
+- check_max_tokens(): this function will check the given max_tokens value against the max allowed for a given model and limit this value
+- get_timestamp(): simply returns a string of the current time and date to log a query
+- establish_connection_aws(): function wrapper establish the connection to the AWS SQL database. Reads in the connection information from the config.py file. Used in the insert_row function.
+- insert_row(): function to insert into the SQL database the log of each call. Use the establish_connection_aws() function to establish the database connection.
+- inputs_non_empty(): helper function to check that inputs have been input before making a call to GPT3.
 
-# creacion de la base de datos
-- cuenta de AWS
-- creacion a partir de codigo
-- conexion a partir de config.ini file
-- INSERT datos a la base de datos
+# Creation of the database
+- AWS account
+- Creation from code
+- Connection from config.ini file
+- **INSERT** data to database
 
-# despliegue con docker
-- creacion de docker file
-- ports
-- docker build con build-args para AWS login
-- push a dockerhub
+# Deployment with docker
+- Docker file creation
+- Ports
+- Docker build con build-args para AWS login
+- Push a dockerhub
