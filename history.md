@@ -34,3 +34,9 @@ are passed.
 - We then expose port 5000 to outside the docker container and launch the app.
 - We also included ARG options in the docker file which then allow build-args being passed during `docker build`. This means that users will not have access to these login details but the app will still connect to the AWS RDS database.
 - The build docker was pushed to dockerhub where it is available for use.
+
+`sudo docker build --build-arg DB_HOST=<db_host> --build-arg DB_PORT=3306 --build-arg DB_USERNAME=<username> --build-arg DB_PASSWORD=<password> --build-arg DB_DATABASE=<db_name> --tag gpt-app:v2 .`
+
+`sudo docker tag gpt-app:v1 seenstevo/:gpt-app:v1`
+
+`sudo docker push seenstevo/:gpt-app:v1`
