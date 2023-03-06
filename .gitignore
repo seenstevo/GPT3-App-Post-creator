@@ -1,4 +1,5 @@
 aws_test.ipynb
 gpt3app/config.ini
-create_db.py
 docker_build_command.txt
+create_db.py
+test/
