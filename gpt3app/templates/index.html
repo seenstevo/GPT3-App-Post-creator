@@ -35,7 +35,16 @@
                     <input type="text" id="api_key" name="api_key">
 
                     <label for="temperature">Temperature (0-1):</label>
-                    <input type="range" id="temperature" name="temperature" min="0" max="1" step="0.1">
+                    <input type="range" id="temperature" name="temperature" min="0" max="1" step="0.1" onchange="showValue()">
+                    <span id="temperatureValue"></span>
+
+                    <script>
+                        function showValue() {
+                          var range = document.getElementById("temperature");
+                          var value = document.getElementById("temperatureValue");
+                          value.innerHTML = range.value;
+                        }
+                    </script>
                     
                 </div>
             </form>
