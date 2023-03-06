@@ -24,11 +24,13 @@ are passed.
 - AWS account
 - Creation of the database using Amazon RDS
 - Change security group, inbound rules to allow connection from python using pymysql library
-- Connection from config.ini file using username, password, host and port given during the creation of the database
+- Connection from config.ini file using username, password, host and port given during the creation of the database.
+- The use of the config.ini file allows us to work locally with this sensitive information without submitting it to github (using the .gitignore file).
 - **INSERT** data to database. The database will register: prompt given to the ChatGPT API, the answer given, model used, date, temperature, max_tokens and status
 
 # Deployment with docker
-- Docker file creation
-- Ports
-- Docker build con build-args para AWS login
-- Push a dockerhub
+- Docker file creation included initialising with python 3.7.4, copying the gpt3app folder as well as the requirements.txt file.
+- The OS is updated and the python libraries installed using pip and the requirements.txt.
+- We then expose port 5000 to outside the docker container and launch the app.
+- We also included ARG options in the docker file which then allow build-args being passed during `docker build`. This means that users will not have access to these login details but the app will still connect to the AWS RDS database.
+- The build docker was pushed to dockerhub where it is available for use.
