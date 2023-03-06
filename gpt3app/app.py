@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 import os
-from app import modules
+import modules
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-app = Flask(__name__, template_folder = 'app/templates')
+app = Flask(__name__, template_folder = 'templates/')
 app.config['DEBUG'] = True
 
 @app.route("/")
@@ -22,9 +22,10 @@ def my_form_post():
     max_tokens = request.form['max_tokens']
     api_key = request.form['api_key']
 
-    if modules.inputs_non_empty(prompt, api_key, temperature, max_tokens):
+    if modules.inputs_non_empty(prompt, api_key, max_tokens):
         temperature = float(temperature)
-        max_tokens = int(float(max_tokens))
+        # reset max_tokens if set above max_tokens max
+        max_tokens = modules.check_max_tokens(int(float(max_tokens)), engine)
 
         # send these to the gpt model
         # seria util saber si hay un error con la respuesta con GPT y hacemos un try, except o algo
@@ -43,4 +44,4 @@ def my_form_post():
         return 'Inputs missing, please try again.' + '<p><a href="/">Back</a></p>\n'
 
 if __name__ == "__main__":
-    app.run(host = '0.0.0.0', port = 5000)
+    app.run(host = '0.0.0.0', port = 5000, debug = True)
