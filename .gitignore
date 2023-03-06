@@ -3,3 +3,4 @@ gpt3app/config.ini
 docker_build_command.txt
 create_db.py
 test/
+gpt3app/__pycache__/
