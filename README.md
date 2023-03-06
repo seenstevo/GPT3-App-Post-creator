@@ -17,8 +17,8 @@ This project creates a Flask web application using in Python that allows users t
 
 ## Deployment with Docker
 1. Ensure you have docker installed on your machine.
-2. Load the image by running `docker pull seenstevo/gpt-app:v2`
-3. Run the image ensuring to set the ports: `docker run -p 5000:5000 seenstevo/gpt-app:v2`
+2. Load the image by running `docker pull seenstevo/gpt-app:v3`
+3. Run the image ensuring to set the ports: `docker run -p 5000:5000 seenstevo/gpt-app:v3`
   (You can see image id by running `docker images` in your terminal)
 4. Click on the first http address shown in your terminal. It should usually be: http://127.0.0.1:5000
 5. Ensure you have a valid API key from OpenAI to use.
