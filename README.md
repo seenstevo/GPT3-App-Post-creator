@@ -33,7 +33,9 @@ If you'd like to contribute to this project, please fork the repository and crea
 
 ## Contributors
 [seenstevo](https://github.com/seenstevo)
+
 [JNevado81](https://github.com/JNevado81)
+
 [JaredR33](https://github.com/JaredR33)
 
 ## License
