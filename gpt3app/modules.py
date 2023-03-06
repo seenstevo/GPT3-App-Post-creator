@@ -10,6 +10,7 @@ def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: floa
     Will also call max_tokens function to ensure no values out of range are passed. 
 
     Args:
+    -----
         prompt (str): the input to the GPT3 model
         api_key (str): API key of user to allow access to GPT3 API
         engine (str): the GPT3 model to use
@@ -17,17 +18,11 @@ def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: floa
         max_tokens (int): the max tokens that the model will use which defines the max length of the output
 
     Returns:
+    -----
         str: the status of the call, success or error
         str: the response text
 
     '''
-    # this will only be nessesary if we use one of our keys as a default
-    # if api_key == "":
-    #     config = configparser.ConfigParser()
-    #     config.read('./app/config.ini')
-    #     openai.api_key = config['gpt3_api_key']['api_key']
-    # else:
-    #     openai.api_key = api_key
     openai.api_key = api_key
 
     try:
@@ -48,10 +43,12 @@ def check_max_tokens(max_tokens: int, engine: str) -> int:
     This function will check the given max_tokens value against the max allowed for a given model and limit this value
 
     Args:
+    -----
         max_tokens (int): the max_tokens set by user to be checked against the model
         engine (str): the GPT3 engine selected against which to check the max_tokens
 
     Returns:
+    -----
         max_tokens (int): the max_tokens, either capped at the max or the original value
     '''
 
@@ -82,6 +79,7 @@ def establish_connection_aws():
     Used in the insert_row function
 
     Returns:
+    -----
         a database connection
     '''
 
@@ -101,6 +99,7 @@ def insert_row(prompt: str, response: str, date: str, engine: str, temperature: 
     Use the establish_connection_aws() function to establish the database connection
 
     Args:
+    -----
         prompt (str): the input to the GPT3 model
         response (str): the response from GPT3
         api_key (str): API key of user to allow access to GPT3 API
@@ -109,6 +108,7 @@ def insert_row(prompt: str, response: str, date: str, engine: str, temperature: 
         max_tokens (int): the max tokens that the model will use which defines the max length of the output
 
     Returns:
+    -----
         None
     '''
 

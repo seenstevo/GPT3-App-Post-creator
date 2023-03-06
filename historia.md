@@ -19,7 +19,7 @@
 - conexion a partir de config.ini file
 - INSERT datos a la base de datos
 
-# despligue con docker
+# despliegue con docker
 - creacion de docker file
 - ports
 - docker build con build-args para AWS login
