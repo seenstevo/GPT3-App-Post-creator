@@ -22,9 +22,10 @@ are passed.
 
 # Creation of the database
 - AWS account
-- Creation from code
-- Connection from config.ini file
-- **INSERT** data to database
+- Creation of the database using Amazon RDS
+- Change security group, inbound rules to allow connection from python using pymysql library
+- Connection from config.ini file using username, password, host and port given during the creation of the database
+- **INSERT** data to database. The database will register: prompt given to the ChatGPT API, the answer given, model used, date, temperature, max_tokens and status
 
 # Deployment with docker
 - Docker file creation
