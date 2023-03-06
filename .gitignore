@@ -1,3 +1,4 @@
-app/gpt_api_key.txt
-app/aws_test.ipynb
-app/config.ini
+aws_test.ipynb
+gpt3app/config.ini
+create_db.py
+docker_build_command.txt

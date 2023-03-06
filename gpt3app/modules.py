@@ -1,7 +1,7 @@
 import openai
 from datetime import datetime
 import pymysql
-import configparser
+import config
 
 
 def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: float, max_tokens: int) -> str:
@@ -78,21 +78,18 @@ def get_timestamp() -> str:
 def establish_connection_aws():
     '''
     Function wrapper establish the connection to the AWS SQL database
-    Reads in the connection information from the config.ini file
+    Reads in the connection information from the config.py file
     Used in the insert_row function
 
     Returns:
         a database connection
     '''
 
-    config = configparser.ConfigParser()
-    config.read('./app/config.ini')
-
-    db = pymysql.connect(host = config['seandatabase']['host'],
-                         user = config['seandatabase']['username'],
-                         password = config['seandatabase']['password'],
-                         port = int(config['seandatabase']['port']),
-                         database = config['seandatabase']['database'],
+    db = pymysql.connect(host = config.db_host,
+                         user = config.db_username,
+                         password = config.db_password,
+                         port = int(config.db_port),
+                         database = config.db_database,
                          cursorclass = pymysql.cursors.DictCursor)
     
     return db
