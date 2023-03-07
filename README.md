@@ -7,6 +7,7 @@ This project creates a Flask web application using in Python that allows users t
 * The front-end should be simple but usable for the user.
 * Store the questions, answers, and corresponding dates in a database deployed on the cloud (AWS).
 * Deploy the application in Docker.
+![alt text](misc/img/arquitectura.JPG)
 
 ## Technologies Used
 * Python
