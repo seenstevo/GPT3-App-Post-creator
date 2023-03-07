@@ -3,7 +3,7 @@ import pymysql
 import configparser
 
 config = configparser.ConfigParser()
-config.read('./app/config.ini')
+config.read('gpt3app/config.ini')
 
 
 db = pymysql.connect(host = config['seandatabase']['host'],
