@@ -1,7 +1,7 @@
 import openai
 from datetime import datetime
 import pymysql
-#import config
+import config
 
 
 def fetch_gpt_response(prompt: str, api_key: str, engine: str, temperature: float, max_tokens: int) -> str:
