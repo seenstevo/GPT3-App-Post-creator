@@ -16,6 +16,17 @@ This project creates a Flask web application using in Python that allows users t
 * Docker
 
 ## Deployment with Docker
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+1. Load the image by running `docker pull seenstevo/gpt-app`
+2. Run the image: `docker run -p 5000:5000 <id_image>`
+  (You can see image id by running `docker images` in your terminal)
+3. Click on the first http adress shown in your terminal. It should usually be: http://127.0.0.1:5000
+     
+=======
+=======
+>>>>>>> e73aca1ea214b53f44656b0e4ba133f2654a3c44
 1. Ensure you have docker installed on your machine.
 2. Load the image by running `docker pull seenstevo/gpt-app:v4`
 3. Run the image ensuring to set the ports: `docker run -p 5000:5000 seenstevo/gpt-app:v4`
@@ -27,6 +38,10 @@ This project creates a Flask web application using in Python that allows users t
 8. Setting the temperature between 0 (conservative, low creativity) and 1 (unhinged, creative) will influence the models behaviour.
 9. Once you've written your prompt, hit the submit (Enviar datos) button to get your GPT3 response.
 10. If there are no errors with the call, you will see the response from GPT3. Otherwise you will see the error message "Something went wrong with the GPT3 call...".
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+>>>>>>> e73aca1ea214b53f44656b0e4ba133f2654a3c44
 
 ## Contributing
 If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
