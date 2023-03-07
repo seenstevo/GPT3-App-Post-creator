@@ -36,19 +36,19 @@ are passed.
 - The build docker was pushed to dockerhub where it is available for use.
 
 ### build the docker image locally
-`sudo docker build --build-arg DB_HOST=<db_host> --build-arg DB_PORT=3306 --build-arg DB_USERNAME=<username> --build-arg DB_PASSWORD=<password> --build-arg DB_DATABASE=<db_name> --tag gpt-app:v3 .`
+`sudo docker build --build-arg DB_HOST=<db_host> --build-arg DB_PORT=3306 --build-arg DB_USERNAME=<username> --build-arg DB_PASSWORD=<password> --build-arg DB_DATABASE=<db_name> --tag gpt-app:v4 .`
 
 ### rename ready to go to seenstevo account
-`sudo docker tag gpt-app:v3 seenstevo/:gpt-app:v3`
+`sudo docker tag gpt-app:v4 seenstevo/:gpt-app:v4`
 
 ### upload the docker image to dockerhub
-`sudo docker push seenstevo/gpt-app:v3`
+`sudo docker push seenstevo/gpt-app:v4`
 
 ### download it from dockerhub
-`sudo docker pull seenstevo/gpt-app:v3`
+`sudo docker pull seenstevo/gpt-app:v4`
 
 ### then to run the container
-`sudo docker run -p 5000:5000 gpt-app:v3`
+`sudo docker run -p 5000:5000 gpt-app:v4`
 
 # Git Hub
 
